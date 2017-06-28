@@ -1,0 +1,72 @@
+ 
+chip "nct6779-isa-0290"
+
+        # Fans
+        label fan1 "Chassis Fan 3 Speed"
+        label fan2 "CPU Fan 1 Speed"
+        label fan3 "CPU Optional Fan Speed"
+        label fan4 "Chassis Fan 1 Speed"
+        label fan5 "Chassis Fan 2 Speed"
+
+        #Fan minimums (Personal customization)
+        #set fan2_min 950
+        
+
+        # Temperatures
+        label temp1 "Motherboard"
+        label temp2 "CPU"
+        label temp3 "Auxillary"
+        label temp4 "VRM"
+        label temp5 "AUXTIN2"
+        label temp6 "CPU (PECI)" #Needs scalar sits at -25
+
+        # Voltages
+
+        label in0 "VCore"
+        label in1 "VPPM" #scalar
+        label in2 "AVCC"
+        label in3 "3VCC"
+        label in4 "+12V" #scalar
+        label in5 "VDDCR_SOC"
+        label in6 "DRAM"
+        label in7 "3VSB"
+        label in8 "VBat"
+        label in9 "Null"
+        label in10 "VIN5"
+        label in11 "Chipset 1.05V"
+        label in12 "+5V" #scalar
+        label in13 "VDDP"
+        label in14 "+1.8V"
+
+	set in0_min 0.64
+	set in0_max 1.45
+	set in4_min 12 * 0.95
+	set in4_max 12 * 1.05
+	set in5_min 0.80
+	set in5_max 1.20
+
+	# DDR 4 RAM Tolerances
+	set in6_min 1.10 #Underclocking
+	set in6_max 1.50 #Intel XMP2.0 recommended max safe voltage
+	
+	# Uncertain tolerances
+	set in11_min 0.90 #Undervolting
+	set in11_max 1.20 #Overvolting
+
+	set in12_min 5 * 0.95
+	set in12_max 5 * 1.05
+
+        # Compute Inputs
+        # The nct6779D uses a 2.048V input range, all inputs above that are scaled using a voltage divider.
+        # Specific inputs like the ADC, AVCC, VBAT, 3VSB and 3VCC utilize an integrated voltage divider 
+        #
+        # values as per nuvoton nct6779D datasheet
+        # Section 8.5 Analog Inputs (Page 54,55)
+        # #       Vs     R1,Rin   R2,Rf    Vin
+        # in4  +12.0     56       10     ~+1.84
+        # in12  +5.0     20       10     ~+1.67
+        #
+	compute in0 @*2, @/2
+        compute in1 @*2, @/2
+        compute in4 ((56/10)+1)*@, @/((56/10)+1)
+        compute in12 ((20/10)+1)*@, @/((20/10)+1)
