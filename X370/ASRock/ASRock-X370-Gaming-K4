@@ -3,7 +3,7 @@ chip "nct6779-isa-0290"
         # Fans
         label fan1 "Chassis Fan 3 Speed"
         label fan2 "CPU Fan 1 Speed"
-        label fan3 "CPU Optional Fan Speed"
+        label fan3 "CPU Fan 2 Speed"
         label fan4 "Chassis Fan 1 Speed"
         label fan5 "Chassis Fan 2 Speed"
 
@@ -13,11 +13,12 @@ chip "nct6779-isa-0290"
 
         # Temperatures
         label temp1 "Motherboard"
-        label temp2 "CPU"
+        label temp2 "CPU MB"
         label temp3 "Auxillary"
         label temp4 "VRM"
         label temp5 "AUXTIN2"
         label temp6 "CPU (PECI)" #Needs scalar sits at -25
+	label temp7 "CPU Internal (? Not accurate)"
 
         # Voltages
 
@@ -31,11 +32,11 @@ chip "nct6779-isa-0290"
         label in7 "3VSB"
         label in8 "VBat"
         label in9 "Null"
-        label in10 "VIN10"
+        label in10 "VIN10 (Mem VTT?)"
         label in11 "Chipset 1.05V"
         label in12 "+5V" #scalar
         label in13 "VDDP"
-        label in14 "+1.8V"
+        label in14 "1.8V+"
 
 	set in0_min 0.64
 	set in0_max 1.45
@@ -69,3 +70,6 @@ chip "nct6779-isa-0290"
         compute in1 @*2, @/2
         compute in4 ((56/10)+1)*@, @/((56/10)+1)
         compute in12 ((20/10)+1)*@, @/((20/10)+1)
+	
+	# Temperature offets
+	compute temp7 @-20,@+20
