@@ -19,6 +19,7 @@ chip "nct6779-isa-0290"
         label temp4 "VRM"
         label temp5 "AUXTIN2"
         label temp6 "CPU (PECI)" #Needs scalar sits at -25
+        label temp7 "CPU Internal (? Not accu)"rate)"
 
         # Voltages
 
@@ -70,3 +71,6 @@ chip "nct6779-isa-0290"
         compute in1 @*2, @/2
         compute in4 ((56/10)+1)*@, @/((56/10)+1)
         compute in12 ((20/10)+1)*@, @/((20/10)+1)
+	
+	# Temperature offsets
+	compute temp7 @-20,@+20
