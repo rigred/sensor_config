@@ -33,8 +33,9 @@ chip "nct6779-isa-0290"
     set temp1_max_hyst 55
 
     # Voltages
-
-    label in0 "VRM VCore" #Different to VDDCR_CPU this is the supply measured at VRM
+    
+    # VCore is different to VDDCR_CPU this is a voltage measured somewhere by the Firmware (Readings may appear strange and fluctuate - this is normal)
+    label in0 "VCore"
     label in1 "VPPM" #scalar
     label in2 "AVCC"
     label in3 "3VCC"
