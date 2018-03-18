@@ -57,7 +57,9 @@ chip "nct6779-isa-0290"
     # If you chip indicates 1.55V continuously the sensors may not be treated correctly by your mainboard or you have buggy firmware.
     # In that case It might be actually 1.55V (Correlates with high heat) or just a bad readout.
     # But sustained 1.45 is also not safe.
-    set in0_min 0.54
+    # I am not sure about the low load voltage drops, but they are normal and likely a measurement/sensor anomaly.
+    # There is a more accurate on-die voltage sensor with ryzen, but the documentation is covered by NDA. k10-temp would need to be adapated.
+    set in0_min 0.40 #Inaccurate at low voltages. 
     set in0_max 1.45
 
     # VPPM Volage 5%
