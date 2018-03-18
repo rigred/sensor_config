@@ -43,14 +43,12 @@ chip "nct6779-isa-0290"
     label in2 "AVCC"
     label in3 "3VCC"
     label in4 "+12V" #scalar
-    label in5 "VDDCR_SOC (Data Fabric)"
+    label in5 "VDDCR_SOC" # (Data Fabric)
     label in6 "DRAM (VDDIO)"
     label in7 "3VSB"
     label in8 "VBat"
     label in9 "Null"
-    label in10 "Mem_VTT (VDDIO/2)"
-    label in11 "Chipset 1.05V"
-    label in12 "+5V" #scalar
+    label in10 "Mem_VTT" #(1/2 of VDDIO)
     label in13 "VDDP"
     label in14 "1.8V+"
 
