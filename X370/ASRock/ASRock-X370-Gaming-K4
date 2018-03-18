@@ -49,6 +49,8 @@ chip "nct6779-isa-0290"
     label in8 "VBat"
     label in9 "Null"
     label in10 "Mem_VTT" #(1/2 of VDDIO)
+    label in11 "Chipset 1.05V"
+    label in12 "+5V"
     label in13 "VDDP"
     label in14 "1.8V+"
 
