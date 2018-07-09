@@ -1,0 +1,42 @@
+# MSI P35-Neo3 MS-7395
+# Values pulled from: https://www.alldatasheet.com/datasheet-pdf/pdf/257913/FINTEK/F71882FG.html
+# See "Application circuit section page 122"
+chip "f71882fg-isa-0a00"
+
+	# Fans
+	label fan1 "CPU Fan"
+	label fan2 "Case Fan"
+	ignore fan3 # Not connected - invalid data
+	ignore fan4 # Not connected - invalid data
+
+	#Temperatures
+	label temp1 "CPU"
+	label temp2 "Auxilliary"
+	ignore temp3 # Not connected, Invalid data (128)
+
+
+	# Voltges
+	label in0 "VCC3V"
+	label in1 "VCore"
+	label in2 "VRAM"
+	label in3 "VCHIPSET"
+	label in4 "+5V"
+	label in5 "+12V"
+	label in6 "VCC1.5V"
+	label in7 "3VSB"
+	label in8 "VBAT"
+
+	# Compute Inputs
+	# Voltage dividers (R1/R2) are as follows:
+	# in2 (10k/10k)
+	# in3 (47k/100k)
+	# in4 (200k/47k)
+	# in5 (200k/20k)
+	# in6 (10k/10k)
+	
+	compute in2 2*@, @/2
+	compute in3 ((47/100)+1)*@, @/((47/100)+1)
+	compute in4 ((200/47)+1)*@, @/((200/47)+1)
+	compute in5 11*@, @/11
+	compute in6 2*@, @/2 #MAGIC
+
