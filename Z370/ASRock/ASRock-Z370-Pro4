@@ -1,0 +1,86 @@
+# Note this is an early (INCOMPLETE) testing config
+chip "nct6683-isa-0a20"
+
+    # Fans
+    label fan1 "Chassis Fan 1 Speed"
+    label fan2 "CPU Fan 1 Speed"
+    label fan3 "CPU Fan 2 Speed"
+    label fan4 "Chassis Fan 2 Speed"
+
+    # Fan minimums (conservative 400rpm)
+    set fan1_min 400
+    set fan2_min 400
+    set fan3_min 400
+    set fan4_min 400
+
+    # Temperatures
+    label temp1 "M/B Temperature"           # Idle 27.000, Load 29.500
+    label temp2 "CPU Socket"                # Uncertain, may be a thermistor near VRM area # Idle 28.000, Load 45.500
+    label temp3 "CPU Package Temperature"   #Idle 30.500(Does not match coretemp-isa-0000, Load 62.500 (Matches coretemp-isa-0000) 
+
+    # Voltages
+    
+    ## Voltages it should have
+    # CPU Vcore
+    # +5V
+    # AVCC
+    # 3VCC
+    # VCCST / VCCSA
+    # PCH +1.0V
+    # DRAM VPP
+    # DRAM
+    # VCCIO
+    
+    # Most voltages for PSU set according to ATX v2.2 spec of +/- 5% on the following:
+    # +3.3VDC	± 5%	+3.135 VDC	+3.465 VDC
+    # +5VDC	    ± 5%	+4.750 VDC	+5.250 VDC
+    # +5VSB 	± 5%	+4.750 VDC	+5.250 VDC
+    # -5VDC     ± 10%	-4.500 VDC	-5.500 VDC
+    # +12VDC	± 5%	+11.400 VDC	+12.600 VDC
+    # -12VDC	± 10%	-10.800 VDC	-13.200 VDC
+    
+     
+    # VCore is different to VDDCR_CPU this is a voltage measured somewhere by the Firmware (Readings may appear strange and fluctuate - this is normal)
+    label in0 "? == Vcore == ?"     # Scalar (Idle 0.352, Load 0.544)
+    label in1 "VCCIO"               # No change Idle -> Load 0.992V
+    label in2 "? == 5V/12V == ?"    # No change Idle -> Load 1.008V
+    label in3 "? == 5V/12V == ?"    # No Change Idle -> Load 1.248
+    label in4 "DRAM Voltage"
+    label in5 "PCH +1.0 Voltage"
+    label in6 "? == ?? == ?"        # Scalar (Idle 0.000, Load 0.208)
+    label in7 "VCCSA"               # Quite Likely VCCSA / VCCST
+    label in8 "3VCC (+3.3V)"
+    label in9 "VSB"
+    label in10 "AVSB"
+    label in11 "VTT"
+    label in12 "VBAT"
+    
+    # +12VDC
+    set in2_min 12 * 0.95
+    set in2_max 12 * 1.05
+
+  
+
+    # Compute Inputs
+    # The nct6683D uses a 2.048V input range, all inputs above that are scaled using a voltage divider.
+    # Specific inputs like the ADC, AVCC, VBAT, 3VSB and 3VCC utilize an integrated voltage divider 
+    
+    # ============= APPROXIMATED VALUES ============= #
+    
+    # These are not guaranteed true, to really find out we would need a better datasheet or measure resistors on the mainboard with a Digital Multimeter
+    # #       Vs     R1,Rin   R2,Rf    Vin
+    # in0  Vcore     Internal Divider  ~1.024
+    # in2  +12.0     120K      10K     ~1.008
+    # in3   +5.0     40K       10K     ~1.248
+    #
+    
+    #compute in0 @*2, @/2
+    #compute in2 ((120/10)+1)*@, @/((120/10)+1)
+    #compute in3 ((40/10)+1)*@, @/((40/10)+1)
+    
+    # ============= APPROXIMATED VALUES ============= #
+
+
+    # Things to filter
+    # These inputs are unused unless you have a case intrusion switch connected.
+    ignore intrusion0
