@@ -1,0 +1,36 @@
+# ASUS PRIME X370-PRO
+# https://www.asus.com/Motherboards/PRIME-X370-PRO/
+# chip: it8665
+# driver: it87
+
+chip "it8665-isa-0290"
+  label in0    "VDDCR CPU (Vcore)"
+  label in1    "Vccp2 / VPP_MEM"
+  label in2    "+12V"  # scalar
+  label in3    "+5V"   # scalar
+  ignore in4  # always 0.033V
+  ignore in5  # same as VIN4
+  ignore in6  # same as VIN4
+  label in7    "+3.3V"
+  label in8    "VBat"
+  label in9    "AVCC3"
+
+  compute in2 ((60/10))*@, @/((60/10))
+  compute in3 ((30/12))*@, @/((30/12))
+  compute in6 @*2, @/2
+
+  label fan1   "CPU Fan"
+  label fan2   "CPU Opt Fan"
+  label fan3   "Chassis Fan 1"
+  label fan4   "Chassis Fan 2"
+  label fan5   "AIO Pump"
+  label fan6   "Water Pump"
+
+  label temp1  "CPU Temp"
+  label temp2  "Motherboard Temp"
+  label temp3  "Temp 3" # South bridge?
+  ignore temp4 # same as temp3
+  ignore temp5 # same as temp3
+  ignore temp6 # same as temp3
+
+  ignore intrusion0
