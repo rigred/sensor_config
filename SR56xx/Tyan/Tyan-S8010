@@ -1,0 +1,48 @@
+# TYAN S8010
+# https://www.tyan.com/Motherboards_S8010_S8010GM2NR
+# chip: w83795g
+# driver: w83795
+
+chip "w83795g-*"
+  label in0    "P_VDD"
+  label in1    "Unknown"
+  label in2    "P_VDDNB"
+  label in3    "Unknown"
+  label in4    "P_VDDIO"
+  label in5    "Unknown"
+  label in6    "VDD_RD890_1_1.1V"
+  label in7    "Unknown"
+  label in8    "VDD_RD890_1.8V"
+  label in9    "P12V" # multiply
+  label in10   "VCC5V" # multiply
+  label in11   "CPU_VLDT"
+  label in12   "+3.3V"
+  label in13   "3VSB"
+  label in14   "VBat"
+
+   compute in10 ((73/10))*@, @/((73/10))
+   compute in9 ((48/10))*@, @/((48/10))
+
+  label fan1   ""
+  label fan2   ""
+  label fan3   "CPU Fan"
+  label fan4   ""
+  label fan5   ""
+  label fan6   ""
+  label fan7   ""
+  label fan8   "Rear Fan 1"
+  label fan9   ""
+  label fan10  ""
+  label fan11  ""
+  label fan12  ""
+
+  label temp1  "SR5670 Temp"
+  label temp2  "Ambient (Invalid)"
+  label temp3  "SAS Temp"
+  label temp4  "PCIE Air Inlet"
+  label temp5  "CPU0 MOS Area"
+  label temp6  "Invalid"
+  label temp7  "CPU Temp"
+  label temp8  "Invalid"
+
+  label intrusion0 "Chassis Intrusion"
